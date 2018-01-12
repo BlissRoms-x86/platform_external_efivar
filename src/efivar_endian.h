@@ -22,6 +22,12 @@
 
 #include <endian.h>
 
+#ifdef __ANDROID__
+#define __bswap_16 __swap16
+#define __bswap_32 __swap32
+#define __bswap_64 __swap64
+#endif
+
 #if __BYTE_ORDER == __LITTLE_ENDIAN
 #define cpu_to_le16(x) (x)
 #define cpu_to_le32(x) (x)

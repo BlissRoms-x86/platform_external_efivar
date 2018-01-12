@@ -217,6 +217,29 @@ get_sector_size(int filedes)
 	return sector_size;
 }
 
+#ifdef __ANDROID__
+#define strdupa(str)							\
+	({								\
+		size_t sz = strlen(str) + 1;				\
+		char *copy = alloca(sz);				\
+		if (copy != NULL) {					\
+			memcpy(copy, str, sz);				\
+		}							\
+		copy;							\
+	})
+
+#define strndupa(str, maxlen)						\
+	({								\
+		size_t len = strnlen(str, maxlen);			\
+		char *copy = alloca(len + 1);				\
+		if (copy != NULL) {					\
+			memcpy(copy, str, len);				\
+			copy[len] = '\0';				\
+		}							\
+		copy;							\
+	})
+#endif
+
 #define asprintfa(str, fmt, args...)					\
 	({								\
 		char *_tmp = NULL;					\
