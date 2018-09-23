@@ -14,7 +14,7 @@ include $(CLEAR_VARS)
 
 LOCAL_MODULE := makeguids
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/include
-LOCAL_CFLAGS := -DEFIVAR_BUILD_ENVIRONMENT
+LOCAL_CFLAGS := -DEFIVAR_BUILD_ENVIRONMENT -Wno-implicit-function-declaration
 LOCAL_SRC_FILES := guid.c makeguids.c
 LOCAL_LDLIBS := -ldl
 include $(BUILD_HOST_EXECUTABLE)
@@ -46,7 +46,7 @@ LIBEFIVAR_SOURCES := \
 	vars.c
 
 LOCAL_SRC_FILES := $(LIBEFIBOOT_SOURCES) $(LIBEFIVAR_SOURCES)
-LOCAL_CFLAGS := -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -std=gnu11
+LOCAL_CFLAGS := -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -std=gnu11 -Wno-address-of-packed-member
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/include
 LOCAL_EXPORT_C_INCLUDE_DIRS := $(LOCAL_C_INCLUDES) $(LOCAL_C_INCLUDES)/efivar $(local-generated-sources-dir)
 LIBEFIVAR_GUIDS_H := $(local-generated-sources-dir)/efivar/efivar-guids.h
